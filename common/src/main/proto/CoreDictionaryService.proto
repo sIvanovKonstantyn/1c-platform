@@ -1,0 +1,32 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.home.demos.platform.common.dictionary;
+
+import "google/protobuf/empty.proto";
+
+message CoreDictionary {
+  int64 id = 1;
+  string name = 2;
+  bool isGroup = 3;
+  int64 parentId = 4;
+  repeated int64 childrenIds = 5;
+}
+
+message CoreDictionaryRequest {
+  CoreDictionary data = 5;
+}
+
+message CoreDictionaryResponse {
+  CoreDictionary data = 1;
+}
+
+message CoreDictionaryMultipleResponse {
+  repeated CoreDictionary data = 1;
+}
+
+service CoreDictionaryService {
+  rpc save(CoreDictionaryRequest) returns (CoreDictionaryResponse){};
+  rpc update(CoreDictionaryRequest) returns (CoreDictionaryResponse){};
+  rpc findAll(google.protobuf.Empty) returns (CoreDictionaryMultipleResponse){};
+  rpc remove(CoreDictionaryRequest) returns (CoreDictionaryResponse){};
+};
